@@ -35,5 +35,12 @@ namespace TestApp.Controllers
             })
             .ToArray();
         }
+        [HttpGet]
+        [Route("GetSquare/{number}")]
+        public decimal GetSquare(long number)
+        {
+            return number * number;
+        }
+
     }
 }
