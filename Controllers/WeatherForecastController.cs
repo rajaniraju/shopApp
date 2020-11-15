@@ -42,5 +42,11 @@ namespace TestApp.Controllers
             return number * number;
         }
 
+        [HttpGet]
+        [Route("GetSum/{number1}/{number2}")]
+        public decimal GetSum(long number1, long number2)
+        {
+            return number1 + number2;
+        }
     }
 }
