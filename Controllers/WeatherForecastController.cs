@@ -48,5 +48,12 @@ namespace TestApp.Controllers
         {
             return number1 + number2;
         }
+
+       /* [HttpPost]
+        [Route("GetObject/{PersonalInformation}")]
+        public object GetObject([FromBody]object personalInformation )
+        {
+            return personalInformation;
+        }*/
     }
 }
