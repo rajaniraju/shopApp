@@ -33,7 +33,7 @@ export class Home extends Component {
   squareOnClick = () => {
     console.log(this.state.value);
     fetch(
-      "https://localhost:44353/WeatherForecast/GetSquare/" + this.state.value
+      "https://localhost:44353/WeatherForecast/GetSquare/" + this.state.text2
     )
       .then((res) => res.json())
       .then((result) => {
@@ -49,7 +49,7 @@ export class Home extends Component {
   };
   passObject = () => {
     fetch(
-      "https://localhost:44353/WeatherForecast/GetObject/{PersonalInformation}",
+      "https://localhost:44353/WeatherForecast/GetObject/{PersonalInformation}"+this.state.personalInformation,
       {
         method: "Post",
         headers: {
