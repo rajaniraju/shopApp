@@ -3,11 +3,9 @@ import React, { Component } from "react";
 export class Home extends Component {
   static displayName = Home.name;
   state = {
-    personalInformation: {
-      FirstName: "",
-      LastName: "",
-      Age: "",
-    },
+    firstName: "",
+    lastName: "",
+    age: "",
     text1: "",
     text2: "",
   };
@@ -15,6 +13,13 @@ export class Home extends Component {
     console.log(e.target.name, e.target.value);
     const propertyName = e.target.name;
     const value = parseFloat(e.target.value);
+    this.setState({ [propertyName]: value });
+  };
+
+  handleTextOnChange = (e) => {
+    console.log(e.target.name, e.target.value);
+    const propertyName = e.target.name;
+    const value = e.target.value;
     this.setState({ [propertyName]: value });
   };
 
@@ -31,7 +36,7 @@ export class Home extends Component {
       });
   };
   squareOnClick = () => {
-    console.log(this.state.value);
+    console.log(this.state.text2);
     fetch(
       "https://localhost:44353/WeatherForecast/GetSquare/" + this.state.text2
     )
@@ -48,17 +53,19 @@ export class Home extends Component {
       });
   };
   passObject = () => {
-    fetch(
-      "https://localhost:44353/WeatherForecast/GetObject/{PersonalInformation}"+this.state.personalInformation,
-      {
-        method: "Post",
-        headers: {
-          "Content-Type": "application/json",
-          // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: JSON.stringify(),
-      }
-    )
+    const personal = {
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      age: this.state.age,
+    };
+    console.log(personal);
+    fetch("https://localhost:44353/WeatherForecast/GetObject", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(personal),
+    })
       .then((res) => res.json())
       .then((result) => {
         console.log(result);
@@ -85,17 +92,17 @@ export class Home extends Component {
             <tbody>
               <tr>
                 <td>
-                  FirstName: <input name="firstname"></input>
+                  FirstName: <input name="firstName" onChange={this.handleTextOnChange}></input>
                 </td>
               </tr>
               <tr>
                 <td>
-                  LastName:<input name="Lastname"></input>
+                  LastName:<input name="lastName" onChange={this.handleTextOnChange}></input>
                 </td>
               </tr>
               <tr>
                 <td>
-                  Age:<input name="age"></input>
+                  Age:<input name="age" onChange={this.handleOnChange}></input>
                 </td>
               </tr>
             </tbody>

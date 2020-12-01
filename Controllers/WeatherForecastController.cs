@@ -50,7 +50,7 @@ namespace TestApp.Controllers
         }
 
         [HttpPost]
-        [Route("GetObject/{PersonalInformation}")]
+        [Route("GetObject")]
         public object GetObject([FromBody]object personalInformation )
         {
             return personalInformation;
