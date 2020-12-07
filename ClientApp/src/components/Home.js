@@ -76,39 +76,53 @@ export class Home extends Component {
     return (
       <div>
         <h1>Hello, world!</h1>
+
         <p>Welcome to your new single-page application, built with:</p>
+
         <input name="text1" onChange={this.handleOnChange}></input>
         <input name="text2" onChange={this.handleOnChange}></input>
         <button onClick={this.sumOnClick}>Sum</button>
         <button onClick={this.squareOnClick}>Square</button>
-        <button onClick={this.getWeatherForecastControl}>
-          Weather Forcast
-        </button>
+
         <br></br>
         <br></br>
         <br></br>
         <div>
-          <table>
-            <tbody>
-              <tr>
-                <td>
-                  FirstName: <input name="firstName" onChange={this.handleTextOnChange}></input>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  LastName:<input name="lastName" onChange={this.handleTextOnChange}></input>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Age:<input name="age" onChange={this.handleOnChange}></input>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <button onClick={this.passObject}>Submit</button>
+          <p>Your Details</p>
+          <form>
+            <div className="form-group">
+              <label htmlFor="FirstName">First Name</label>
+              <input
+                name="firstName"
+                className="form-control"
+                onChange={this.handleTextOnChange}
+              ></input>
+            </div>
+            <div className="form-group">
+              <label htmlFor="LastName">Last Name</label>
+              <input
+                name="lastName"
+                className="form-control"
+                onChange={this.handleTextOnChange}
+              ></input>
+            </div>
+            <div className="form-group">
+              <label htmlFor="Age">Age</label>
+              <input
+                name="age"
+                className="form-control"
+                onChange={this.handleOnChange}
+              ></input>
+            </div>
+          </form>
+          <button onClick={this.passObject}>Add</button>
+        </div>
+        <br></br>
+        <div>
+          <p>To check current weather click here</p>
+          <button onClick={this.getWeatherForecastControl}>
+            Weather Forcast
+          </button>
         </div>
       </div>
     );
