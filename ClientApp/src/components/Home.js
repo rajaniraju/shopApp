@@ -3,6 +3,7 @@ import React, { Component } from "react";
 export class Home extends Component {
   static displayName = Home.name;
   state = {
+    userText:"", 
     firstName: "",
     lastName: "",
     age: "",
@@ -17,10 +18,10 @@ export class Home extends Component {
   };
 
   handleTextOnChange = (e) => {
-    console.log(e.target.name, e.target.value);
     const propertyName = e.target.name;
     const value = e.target.value;
     this.setState({ [propertyName]: value });
+    console.log(e.target.name, e.target.value);
   };
 
   sumOnClick = () => {
@@ -71,6 +72,23 @@ export class Home extends Component {
         console.log(result);
       });
   };
+  setUserText() {
+    const personal = {userText: "this.state.userText" };
+    
+    console.log(personal);
+    fetch("https://localhost:44353/WeatherForecast/SetUserText", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(personal),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+      });
+  };
+  
 
   render() {
     return (
@@ -83,10 +101,6 @@ export class Home extends Component {
         <input name="text2" onChange={this.handleOnChange}></input>
         <button onClick={this.sumOnClick}>Sum</button>
         <button onClick={this.squareOnClick}>Square</button>
-
-        <br></br>
-        <br></br>
-        <br></br>
         <div>
           <p>Your Details</p>
           <form>
@@ -117,7 +131,22 @@ export class Home extends Component {
           </form>
           <button onClick={this.passObject}>Add</button>
         </div>
-        <br></br>
+        <form>
+          <div className="form-group">
+            <label htmlFor="EnterSomething">Enter Something</label>
+            <input
+              name="userText"
+              className="form-control"
+              placeholder="enter"
+              onChange={this.handleTextOnChange}
+            ></input>
+          </div>
+          <div>
+            <button onClick={this.setUserText}>Set</button>
+            <button>Get</button>
+          </div>
+        </form>
+
         <div>
           <p>To check current weather click here</p>
           <button onClick={this.getWeatherForecastControl}>

@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace TestApp.Controllers
+
 {
     [ApiController]
     [Route("[controller]")]
@@ -44,6 +46,7 @@ namespace TestApp.Controllers
 
         [HttpGet]
         [Route("GetSum/{number1}/{number2}")]
+
         public decimal GetSum(long number1, long number2)
         {
             return number1 + number2;
@@ -51,9 +54,17 @@ namespace TestApp.Controllers
 
         [HttpPost]
         [Route("GetObject")]
-        public object GetObject([FromBody]object personalInformation )
+
+        public object GetObject([FromBody] object personalInformation)
         {
             return personalInformation;
         }
+        [HttpPost]
+        [Route("SetUserText")]
+        public object SetUserText([FromBody] object userText)
+        {
+            return userText;
+        }
+
     }
 }
