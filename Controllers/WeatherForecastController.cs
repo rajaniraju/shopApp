@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections;
@@ -21,10 +22,12 @@ namespace TestApp.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IMemoryCache _memoryCache;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IMemoryCache memoryCache)
         {
             _logger = logger;
+            _memoryCache = memoryCache;
         }
 
         [HttpGet]
@@ -56,7 +59,6 @@ namespace TestApp.Controllers
 
         [HttpPost]
         [Route("GetObject")]
-
         public object GetObject([FromBody] object personalInformation)
             //public return type method(sending type attribute)
         {
@@ -66,8 +68,21 @@ namespace TestApp.Controllers
         [Route("SetUserText")]
         public string SetUserText([FromBody] object personal)
         {
+            _memoryCache.Set("MY_KEY", personal);
+            //HttpContext.Current.Cache.Insert(
+            //   key,
+            //   o,
+            //   null,
+            //   DateTime.Now.AddMinutes(Timeout),
+            //   System.Web.Caching.Cache.NoSlidingExpiration);*/
             return personal.ToString(); 
         }
-
+        [HttpGet]
+        [Route("GetUserText")]
+        public object GetUserText()
+        {
+            var obj = _memoryCache.Get("MY_KEY");
+            return obj;
+        }
     }
 }

@@ -21,7 +21,7 @@ export class Home extends Component {
     const propertyName = e.target.name;
     const value = e.target.value;
     this.setState({ [propertyName]: value });
-    console.log(e.target.name, e.target.value);
+    // console.log(e.target.name, e.target.value);
   };
 
   sumOnClick = () => {
@@ -88,6 +88,16 @@ export class Home extends Component {
         console.log(v);
       });
   };
+  getUserText = () => {
+    
+    fetch(
+      "https://localhost:44353/WeatherForecast/GetUserText"
+    )
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+      });
+  }
 
   render() {
     return (
@@ -138,7 +148,7 @@ export class Home extends Component {
         </div>
         <div>
           <button onClick={this.setUserText}>Set</button>
-          <button>Get</button>
+          <button onClick={this.getUserText}>Get</button>
         </div>
         <div>
           <p>To check current weather click here</p>
