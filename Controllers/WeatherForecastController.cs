@@ -3,7 +3,9 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace TestApp.Controllers
@@ -56,14 +58,15 @@ namespace TestApp.Controllers
         [Route("GetObject")]
 
         public object GetObject([FromBody] object personalInformation)
+            //public return type method(sending type attribute)
         {
             return personalInformation;
         }
         [HttpPost]
         [Route("SetUserText")]
-        public object SetUserText([FromBody] object userText)
+        public string SetUserText([FromBody] object personal)
         {
-            return userText;
+            return personal.ToString(); 
         }
 
     }

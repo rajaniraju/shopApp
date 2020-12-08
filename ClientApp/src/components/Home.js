@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export class Home extends Component {
   static displayName = Home.name;
   state = {
-    userText:"", 
+    userText: "",
     firstName: "",
     lastName: "",
     age: "",
@@ -69,12 +69,11 @@ export class Home extends Component {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
+        console.log(result.firstName, result.lastName, result.age);
       });
   };
-  setUserText() {
-    const personal = {userText: "this.state.userText" };
-    
+  setUserText = () => {
+    const personal = { userText: this.state.userText };
     console.log(personal);
     fetch("https://localhost:44353/WeatherForecast/SetUserText", {
       method: "POST",
@@ -85,18 +84,16 @@ export class Home extends Component {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
+        var v = JSON.stringify(result);
+        console.log(v);
       });
   };
-  
 
   render() {
     return (
       <div>
         <h1>Hello, world!</h1>
-
         <p>Welcome to your new single-page application, built with:</p>
-
         <input name="text1" onChange={this.handleOnChange}></input>
         <input name="text2" onChange={this.handleOnChange}></input>
         <button onClick={this.sumOnClick}>Sum</button>
@@ -131,22 +128,18 @@ export class Home extends Component {
           </form>
           <button onClick={this.passObject}>Add</button>
         </div>
-        <form>
-          <div className="form-group">
-            <label htmlFor="EnterSomething">Enter Something</label>
-            <input
-              name="userText"
-              className="form-control"
-              placeholder="enter"
-              onChange={this.handleTextOnChange}
-            ></input>
-          </div>
-          <div>
-            <button onClick={this.setUserText}>Set</button>
-            <button>Get</button>
-          </div>
-        </form>
-
+        <div className="form-group">
+          <label htmlFor="EnterSomething">Enter Something</label>
+          <input
+            name="userText"
+            className="form-control"
+            onChange={this.handleTextOnChange}
+          ></input>
+        </div>
+        <div>
+          <button onClick={this.setUserText}>Set</button>
+          <button>Get</button>
+        </div>
         <div>
           <p>To check current weather click here</p>
           <button onClick={this.getWeatherForecastControl}>
